@@ -25,8 +25,8 @@ Tudo em `figuras/` e `resultados/` é gerado pelo programa.
 python codigo_P1.py
 ```
 
-Leva cerca de 5 segundos. O programa baixa o painel deste repositório por um link preso ao
-commit `85ac694`, então lê sempre o mesmo arquivo, mesmo que o repositório mude. As saídas vão
+Leva cerca de 5 segundos. O programa baixa o painel deste repositório, pelo link raw do branch
+`main`. As saídas vão
 para `figuras/` e `resultados/`, ao lado do programa. A semente é fixa (731) e duas execuções
 produzem resultados idênticos.
 
