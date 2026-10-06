@@ -1,0 +1,364 @@
+ME731 P1: ACP de indicadores hospitalares do SUS-SP
+------------------------------------------------------------
+Python 3.12.13 | numpy 2.5.3 | scipy 1.18.1 | pandas 3.0.6 | matplotlib 3.11.2 | semente 731
+
+[dados] 3025 linhas no painel; 275 hospitais em 2025; p = 8
+  \vN                           = 275                    hospitais em 2025
+  \vSemente                     = 731                    
+  \vNInicios                    = 100                    inícios do k-médias
+  \vNPainel                     = 3.025                  linhas do painel
+  \vNHospPainel                 = 275                    hospitais no painel
+  \vNOSS                        = 62                     OSS
+  \vNFilant                     = 159                    Filantrópico
+  \vNDireta                     = 36                     Direta
+  \vNUniv                       = 18                     Universitário
+  \vNSemUTI                     = 49                     sem leito de UTI SUS
+  \vNAltaZero                   = 77                     sem saída de alta complexidade
+  \vNOcupCem                    = 62                     ocupação acima de 100%
+  \vRBarcelona                  = 0,98                   leitos x Barcelona
+  \vRVolume                     = 0,90                   leitos x saídas
+  \vRMortes                     = 1,000                  Spearman mortalidade geral x ajustada
+[fora] r(leitos, Barcelona) = 0.983; r(leitos, saídas) = 0.904; Spearman(mort_all, mort_sem_excl) = 1.0000
+[identidade] diferença máxima em log = 1.78e-15
+[descr] leitos  média    155.633  dp    158.449  mediana    106.000  assimetria   3.93
+[descr] uti     média     12.991  dp      7.652  mediana     13.898  assimetria  -0.25
+[descr] alta    média      7.986  dp     14.346  mediana      0.643  assimetria   2.74
+[descr] fat     média   1674.215  dp   1387.311  mediana   1283.459  assimetria   3.74
+[descr] tmp     média      4.561  dp      1.757  mediana      4.263  assimetria   1.56
+[descr] mort    média      5.450  dp      3.182  mediana      5.521  assimetria   1.56
+[descr] ocup    média     75.967  dp     27.333  mediana     78.550  assimetria  -0.26
+[descr] giro    média     55.331  dp     18.305  mediana     54.811  assimetria   0.00
+  \vAssimFat                    = 3,74                   
+  \vAssimLeitos                 = 3,93                   
+  \vAssimAlta                   = 2,74                   
+  \vFatMediana                  = 1.283                  
+  \vFatMax                      = 11.345                 
+  \vNAssimForte                 = cinco                  variáveis com |assimetria| > 1
+  \vRAltaFat                    = 0,80                   
+  \vRTmpMort                    = 0,57                   
+  \vRTmpGiro                    = \ensuremath{-}0,49     
+  \vRUtiOcup                    = 0,60                   
+  \vRMaxAbs                     = 0,80                   
+  \vNRAcimaTres                 = 12                     pares com |r| > 0,3
+  \vNPares                      = 28                     
+  \vNRPos                       = 24                     pares com r positivo
+[Mardia] b1 = 85.277, A = 3908.6 (gl 120), p = 0.00e+00; b2 = 196.37 (normal: 80), z = 76.28, p = 0.00e+00
+  \vMardiaBUm                   = 85,28                  
+  \vMardiaA                     = 3.908,6                
+  \vMardiaGl                    = 120                    
+  \vMardiaBDois                 = 196,37                 
+  \vMardiaBDoisEsp              = 80                     
+  \vMardiaZ                     = 76,3                   
+[Bartlett] qui2 = 1234.1, gl = 28, p = 3.19e-242, det R = 0.01044
+  \vBartlett                    = 1.234,1                
+  \vBartlettGl                  = 28                     
+  \vDetR                        = 0,0104                 
+[KMO] global = 0.499; MSA = leitos 0.81, uti 0.58, alta 0.54, fat 0.60, tmp 0.43, mort 0.80, ocup 0.41, giro 0.28
+[SMC] leitos 0.251, uti 0.577, alta 0.693, fat 0.781, tmp 0.793, mort 0.380, ocup 0.843, giro 0.810
+  \vKMO                         = 0,499                  
+  \vMSAMinVar                   = saídas por leito       
+  \vMSAMin                      = 0,28                   
+  \vSMCOcup                     = 0,84                   
+  \vSMCFat                      = 0,78                   
+[Mahalanobis] corte 17.53: 27 atípicos (esperado 6.9); acima de 26.12: 13; máximo 80.7
+  \vCorteDois                   = 17,53                  
+  \vCorteTres                   = 26,12                  
+  \vNAtip                       = 27                     
+  \vPctAtip                     = 9,8                    
+  \vNAtipEsp                    = 6,9                    esperado sob normalidade
+  \vNAtipTres                   = 13                     
+  \vDMax                        = 80,7                   
+[atípicos por rede] OSS 1, Filantrópico 15, Direta 6, Universitário 5
+  \vNAtipUniv                   = 5                      
+  \vPctUnivAtip                 = 28                     
+[ACP] proposições conferidas (traço, Var(Y), ortonormalidade, cargas, SVD)
+  \vLamUm                       = 3,01                   autovalor 1
+  \vPctUm                       = 37,6                   
+  \vAcumUm                      = 37,6                   
+  \vLamDois                     = 1,70                   autovalor 2
+  \vPctDois                     = 21,2                   
+  \vAcumDois                    = 58,8                   
+  \vLamTres                     = 1,38                   autovalor 3
+  \vPctTres                     = 17,3                   
+  \vAcumTres                    = 76,0                   
+  \vLamQuatro                   = 0,80                   autovalor 4
+  \vPctQuatro                   = 10,0                   
+  \vAcumQuatro                  = 86,0                   
+  \vLamCinco                    = 0,52                   autovalor 5
+  \vPctCinco                    = 6,5                    
+  \vAcumCinco                   = 92,6                   
+  \vLamSeis                     = 0,40                   autovalor 6
+  \vPctSeis                     = 4,9                    
+  \vAcumSeis                    = 97,5                   
+  \vLamSete                     = 0,13                   autovalor 7
+  \vPctSete                     = 1,7                    
+  \vAcumSete                    = 99,2                   
+  \vLamOito                     = 0,07                   autovalor 8
+  \vPctOito                     = 0,8                    
+  \vAcumOito                    = 100,0                  
+  \vLamOitoTres                 = 0,068                  menor autovalor com 3 casas
+[ACP] autovalores: 3.007, 1.695, 1.380, 0.800, 0.521, 0.395, 0.132, 0.068
+[ACP] % acumulada: 37.6, 58.8, 76.0, 86.0, 92.6, 97.5, 99.2, 100.0
+[retenção] Kaiser 3; lambda > 0,7: 4; 70%: 3; 80%: 4; paralela (permutação) 3; paralela (normal) 3
+[paralela] p95 permutação: 1.342, 1.226, 1.133, 1.070, 1.007, 0.947, 0.890, 0.821
+[paralela] p95 normal:     1.343, 1.222, 1.136, 1.063, 1.006, 0.949, 0.887, 0.824
+  \vParPermTres                 = 1,13                   
+  \vParPermQuatro               = 1,07                   
+  \vParNormTres                 = 1,14                   
+  \vParNormQuatro               = 1,06                   
+  \vParPermUm                   = 1,34                   
+  \vBPar                        = 1.000                  
+  \vBBoot                       = 2.000                  
+  \vLamLoUm                     = 2,74                   
+  \vLamHiUm                     = 3,36                   
+  \vLamLoDois                   = 1,56                   
+  \vLamHiDois                   = 1,88                   
+  \vLamLoTres                   = 1,09                   
+  \vLamHiTres                   = 1,60                   
+  \vLamLoQuatro                 = 0,68                   
+  \vLamHiQuatro                 = 0,87                   
+  \vAcumTresLo                  = 74,4                   
+  \vAcumTresHi                  = 78,9                   
+  \vPctBootKaiser               = 99,7                   % das reamostras com exatamente 3 autovalores > 1
+[bootstrap] IC 95% dos autovalores 1 a 4: [2.74, 3.36]; [1.56, 1.88]; [1.09, 1.60]; [0.68, 0.87]
+[bootstrap] % acumulada com 3: [74.4, 78.9]; exatamente 3 > 1 em 99.7%
+[cargas] CP1: leitos 0.57, uti 0.74, alta 0.61, fat 0.81, tmp 0.66, mort 0.48, ocup 0.67, giro -0.09
+[cargas] CP2: leitos 0.05, uti 0.22, alta 0.28, fat 0.14, tmp -0.61, mort -0.53, ocup 0.37, giro 0.87
+[cargas] CP3: leitos 0.20, uti -0.23, alta 0.61, fat 0.46, tmp -0.20, mort -0.44, ocup -0.57, giro -0.39
+[comunalidade] leitos 0.37, uti 0.65, alta 0.82, fat 0.88, tmp 0.84, mort 0.70, ocup 0.91, giro 0.92
+  \vCUmLeitos                   = 0,57                   carga de leitos na CP1
+  \vCDoisLeitos                 = 0,05                   carga de leitos na CP2
+  \vCTresLeitos                 = 0,20                   carga de leitos na CP3
+  \vHDoisLeitos                 = 0,37                   comunalidade de leitos
+  \vCUmUti                      = 0,74                   carga de uti na CP1
+  \vCDoisUti                    = 0,22                   carga de uti na CP2
+  \vCTresUti                    = \ensuremath{-}0,23     carga de uti na CP3
+  \vHDoisUti                    = 0,65                   comunalidade de uti
+  \vCUmAlta                     = 0,61                   carga de alta na CP1
+  \vCDoisAlta                   = 0,28                   carga de alta na CP2
+  \vCTresAlta                   = 0,61                   carga de alta na CP3
+  \vHDoisAlta                   = 0,82                   comunalidade de alta
+  \vCUmFat                      = 0,81                   carga de fat na CP1
+  \vCDoisFat                    = 0,14                   carga de fat na CP2
+  \vCTresFat                    = 0,46                   carga de fat na CP3
+  \vHDoisFat                    = 0,88                   comunalidade de fat
+  \vCUmTmp                      = 0,66                   carga de tmp na CP1
+  \vCDoisTmp                    = \ensuremath{-}0,61     carga de tmp na CP2
+  \vCTresTmp                    = \ensuremath{-}0,20     carga de tmp na CP3
+  \vHDoisTmp                    = 0,84                   comunalidade de tmp
+  \vCUmMort                     = 0,48                   carga de mort na CP1
+  \vCDoisMort                   = \ensuremath{-}0,53     carga de mort na CP2
+  \vCTresMort                   = \ensuremath{-}0,44     carga de mort na CP3
+  \vHDoisMort                   = 0,70                   comunalidade de mort
+  \vCUmOcup                     = 0,67                   carga de ocup na CP1
+  \vCDoisOcup                   = 0,37                   carga de ocup na CP2
+  \vCTresOcup                   = \ensuremath{-}0,57     carga de ocup na CP3
+  \vHDoisOcup                   = 0,91                   comunalidade de ocup
+  \vCUmGiro                     = \ensuremath{-}0,09     carga de giro na CP1
+  \vCDoisGiro                   = 0,87                   carga de giro na CP2
+  \vCTresGiro                   = \ensuremath{-}0,39     carga de giro na CP3
+  \vHDoisGiro                   = 0,92                   comunalidade de giro
+  \vMenorHDois                  = 0,37                   
+  \vLeitosCQuatro               = 0,76                   carga de leitos na CP4
+[CP8] leitos -0.050, uti -0.202, alta -0.049, fat 0.082, tmp -0.505, mort 0.005, ocup 0.623, giro -0.552
+[CP7] leitos -0.004, uti -0.224, alta -0.588, fat 0.745, tmp -0.048, mort 0.074, ocup -0.099, giro 0.178
+  \vEOitoOcup                   = 0,62                   coeficiente de ocup na CP8
+  \vEOitoGiro                   = \ensuremath{-}0,55     coeficiente de giro na CP8
+  \vEOitoTmp                    = \ensuremath{-}0,50     coeficiente de tmp na CP8
+  \vEOitoUti                    = \ensuremath{-}0,20     coeficiente de uti na CP8
+  \vEOitoOutrosMax              = 0,08                   
+  \vESeteAlta                   = \ensuremath{-}0,59     
+  \vESeteFat                    = 0,75                   
+[CP8] menor autovalor com as variáveis em log: -9.79e-30
+[KMO] sem a ocupação: 0.576; autovalores: 2.690, 1.629, 0.957, 0.780, 0.505, 0.309, 0.131
+  \vKMOSemOcup                  = 0,576                  
+  \vMSAGiroSemOcup              = 0,52                   
+  \vLamMinSemOcup               = 0,13                   
+[D2] atípicos sem escore >= 2,5 nas 3 primeiras CP: 12 de 27: 9601 (CP4), 2077396 (CP4), 2078015 (CP4), 2080346 (CP8), 2082187 (CP4), 2082667 (CP8), 2083086 (CP7), 2090236 (CP5), 2688433 (CP8), 2688689 (CP4), 2698471 (CP6), 2790734 (CP6)
+  \vNAtipInvisivel              = 12                     
+  \vNAtipInvisivelUltimas       = 6                      maior escore nas CP6 a CP8
+  \vNAtipInvisivelQuatro        = 5                      maior escore na CP4
+[escores por rede, mediana]
+                CP1   CP2   CP3
+rede                           
+Direta         0.41 -0.94 -0.29
+Filantrópico  -0.54  0.16  0.04
+OSS            0.36  0.14 -0.50
+Universitário  1.71  0.45  0.17
+  \vMedOSSUm                    = 0,36                   
+  \vMedOSSDois                  = 0,14                   
+  \vMedOSSTres                  = \ensuremath{-}0,50     
+  \vMedFilantUm                 = \ensuremath{-}0,54     
+  \vMedFilantDois               = 0,16                   
+  \vMedFilantTres               = 0,04                   
+  \vMedDiretaUm                 = 0,41                   
+  \vMedDiretaDois               = \ensuremath{-}0,94     
+  \vMedDiretaTres               = \ensuremath{-}0,29     
+  \vMedUnivUm                   = 1,71                   
+  \vMedUnivDois                 = 0,45                   
+  \vMedUnivTres                 = 0,17                   
+[S] CP1 explica 98.9%; coeficiente do faturamento 0.9989; faturamento = 98.6% do traço
+  \vPctSUm                      = 98,9                   
+  \vESFat                       = 0,999                  
+  \vPctVarFat                   = 98,6                   
+  \vDPFat                       = 1.387                  
+  \vDPTmp                       = 1,76                   
+[sens] base          n=275 lam=[3.007 1.695 1.38  0.8  ] acum3=76.0 Kaiser=3 paralela=3 ordem=(0, 1, 2) congruência=[1. 1. 1.]
+  \vSensBaseAcum                = 76,0                   
+  \vSensBaseLamTres             = 1,38                   
+  \vSensBaseKaiser              = 3                      
+  \vSensBasePar                 = 3                      
+  \vSensBaseParTres             = 1,14                   
+  \vSensBasePhiUm               = 1,00                   
+  \vSensBasePhiDois             = 1,00                   
+  \vSensBasePhiTres             = 1,00                   
+[sens] sem_atipicos  n=248 lam=[3.529 1.597 1.022 0.759] acum3=76.9 Kaiser=3 paralela=2 ordem=(0, 1, 2) congruência=[0.989 0.984 0.917]
+  \vSensSemAcum                 = 76,9                   
+  \vSensSemLamTres              = 1,02                   
+  \vSensSemKaiser               = 3                      
+  \vSensSemPar                  = 2                      
+  \vSensSemParTres              = 1,14                   
+  \vSensSemPhiUm                = 0,99                   
+  \vSensSemPhiDois              = 0,98                   
+  \vSensSemPhiTres              = 0,92                   
+  \vSemNAtip                    = 248                    
+[sens] log_fat       n=275 lam=[3.197 1.711 1.218 0.778] acum3=76.6 Kaiser=3 paralela=3 ordem=(0, 1, 2) congruência=[0.997 0.998 0.974]
+  \vSensLogAcum                 = 76,6                   
+  \vSensLogLamTres              = 1,22                   
+  \vSensLogKaiser               = 3                      
+  \vSensLogPar                  = 3                      
+  \vSensLogParTres              = 1,14                   
+  \vSensLogPhiUm                = 1,00                   
+  \vSensLogPhiDois              = 1,00                   
+  \vSensLogPhiTres              = 0,97                   
+[sens] postos        n=275 lam=[3.75  1.588 0.904 0.687] acum3=78.0 Kaiser=2 paralela=2 ordem=(0, 1, 2) congruência=[0.991 0.992 0.971]
+  \vSensPostosAcum              = 78,0                   
+  \vSensPostosLamTres           = 0,90                   
+  \vSensPostosKaiser            = 2                      
+  \vSensPostosPar               = 2                      
+  \vSensPostosParTres           = 1,14                   
+  \vSensPostosPhiUm             = 0,99                   
+  \vSensPostosPhiDois           = 0,99                   
+  \vSensPostosPhiTres           = 0,97                   
+  \vPostosCUmGiro               = 0,06                   
+  \vPostosCUmLeitos             = 0,77                   
+  \vPostosLamUm                 = 3,75                   
+  \vPostosPctUm                 = 46,9                   
+[sens] menor congruência: geral 0.917, CP1 e CP2 0.984, CP3 0.917
+  \vPhiMin                      = 0,92                   
+  \vPhiMinTres                  = 0,92                   
+  \vPhiMinUmDois                = 0,98                   
+[AF] Heywood = True na iteração 5; comunalidades: leitos 0.202, uti 0.449, alta 0.685, fat 0.969, tmp 0.848, mort 0.376, ocup 1.003, giro 0.861
+  \vAFIter                      = 5                      
+  \vAFVar                       = ocupação               
+  \vAFHDois                     = 1,003                  
+[k-médias] silhueta: k=2 0.297, k=3 0.308, k=4 0.300, k=5 0.305, k=6 0.309
+[k-médias] SQ dentro: k=2 1165.4, k=3 909.3, k=4 712.4, k=5 598.5, k=6 515.1
+  \vSilMin                      = 0,30                   
+  \vSilMax                      = 0,31                   
+  \vSilDois                     = 0,30                   
+  \vSilTres                     = 0,31                   
+  \vSilQuatro                   = 0,30                   
+  \vSilCinco                    = 0,30                   
+  \vSilSeis                     = 0,31                   
+  \vRedSQTres                   = 22                     redução da SQ de 2 para 3
+  \vRedSQQuatro                 = 22                     redução da SQ de 3 para 4
+  \vRedSQCinco                  = 16                     redução da SQ de 4 para 5
+  \vRedSQSeis                   = 14                     redução da SQ de 5 para 6
+  \vGSil                        = seis                   
+  \vARI                         = 0,50                   Rand ajustado k-médias x Ward
+[grupos] maior silhueta em k = 6; usei k = 4; Rand ajustado com Ward = 0.505
+[grupos] tamanhos: G1 70, G2 115, G3 68, G4 22
+[grupos] medianas:
+   leitos    uti   alta      fat   tmp  mort   ocup   giro
+0    57.0   0.00   0.00   588.50  3.19  4.06  44.98  46.44
+1   108.0  14.96   2.05  1315.69  3.86  5.13  84.77  68.40
+2   195.5  17.24   2.54  1717.68  6.07  7.38  92.67  47.11
+3   248.0  16.27  44.06  3617.57  4.99  5.01  86.15  53.15
+[grupos] por rede:
+rede   OSS  Filantrópico  Direta  Universitário
+row_0                                          
+0        7            55       8              0
+1       31            71       7              6
+2       23            20      20              5
+3        1            13       1              7
+[grupos] mediana dos escores:
+      0     1     2
+0 -1.96 -0.69  0.48
+1 -0.23  0.82 -0.55
+2  0.95 -0.67 -0.62
+3  2.49  1.05  1.99
+  \vGUmN                        = 70                     
+  \vGUmLeitos                   = 57                     
+  \vGUmUti                      = 0,0                    
+  \vGUmAlta                     = 0,0                    
+  \vGUmFat                      = 588                    
+  \vGUmTmp                      = 3,19                   
+  \vGUmMort                     = 4,06                   
+  \vGUmOcup                     = 45,0                   
+  \vGUmGiro                     = 46,4                   
+  \vGUmPctOSS                   = 10                     
+  \vGUmNOSS                     = 7                      
+  \vGUmPctFilant                = 79                     
+  \vGUmNFilant                  = 55                     
+  \vGUmPctDireta                = 11                     
+  \vGUmNDireta                  = 8                      
+  \vGUmPctUniv                  = 0                      
+  \vGUmNUniv                    = 0                      
+  \vGDoisN                      = 115                    
+  \vGDoisLeitos                 = 108                    
+  \vGDoisUti                    = 15,0                   
+  \vGDoisAlta                   = 2,1                    
+  \vGDoisFat                    = 1.316                  
+  \vGDoisTmp                    = 3,86                   
+  \vGDoisMort                   = 5,13                   
+  \vGDoisOcup                   = 84,8                   
+  \vGDoisGiro                   = 68,4                   
+  \vGDoisPctOSS                 = 27                     
+  \vGDoisNOSS                   = 31                     
+  \vGDoisPctFilant              = 62                     
+  \vGDoisNFilant                = 71                     
+  \vGDoisPctDireta              = 6                      
+  \vGDoisNDireta                = 7                      
+  \vGDoisPctUniv                = 5                      
+  \vGDoisNUniv                  = 6                      
+  \vGTresN                      = 68                     
+  \vGTresLeitos                 = 196                    
+  \vGTresUti                    = 17,2                   
+  \vGTresAlta                   = 2,5                    
+  \vGTresFat                    = 1.718                  
+  \vGTresTmp                    = 6,07                   
+  \vGTresMort                   = 7,38                   
+  \vGTresOcup                   = 92,7                   
+  \vGTresGiro                   = 47,1                   
+  \vGTresPctOSS                 = 34                     
+  \vGTresNOSS                   = 23                     
+  \vGTresPctFilant              = 29                     
+  \vGTresNFilant                = 20                     
+  \vGTresPctDireta              = 29                     
+  \vGTresNDireta                = 20                     
+  \vGTresPctUniv                = 7                      
+  \vGTresNUniv                  = 5                      
+  \vGQuatroN                    = 22                     
+  \vGQuatroLeitos               = 248                    
+  \vGQuatroUti                  = 16,3                   
+  \vGQuatroAlta                 = 44,1                   
+  \vGQuatroFat                  = 3.618                  
+  \vGQuatroTmp                  = 4,99                   
+  \vGQuatroMort                 = 5,01                   
+  \vGQuatroOcup                 = 86,2                   
+  \vGQuatroGiro                 = 53,2                   
+  \vGQuatroPctOSS               = 5                      
+  \vGQuatroNOSS                 = 1                      
+  \vGQuatroPctFilant            = 59                     
+  \vGQuatroNFilant              = 13                     
+  \vGQuatroPctDireta            = 5                      
+  \vGQuatroNDireta              = 1                      
+  \vGQuatroPctUniv              = 32                     
+  \vGQuatroNUniv                = 7                      
+  \vPctGeralOSS                 = 23                     
+  \vPctGeralFilant              = 58                     
+  \vPctGeralDireta              = 13                     
+  \vPctGeralUniv                = 7                      
+  \vEscalaBiplot                = 2,5                    
+[figuras] 7 arquivos, 281 kB: fig01_distribuicoes.pdf 74 kB, fig02_atipicos.pdf 45 kB, fig03_retencao.pdf 30 kB, fig04_cargas.pdf 23 kB, fig05_biplot.pdf 43 kB, fig06_sensibilidade.pdf 33 kB, fig07_grupos.pdf 32 kB
