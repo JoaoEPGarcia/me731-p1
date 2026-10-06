@@ -27,8 +27,7 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter, MaxNLocator
 
 # link preso ao commit, para o arquivo não mudar por baixo do relatório
-URL = ("https://raw.githubusercontent.com/JoaoEPGarcia/me731-p1/"
-       "85ac694b2f650ebcedbbaeec53d09dd21571d964/painel_definitivo.csv")
+URL = "https://raw.githubusercontent.com/JoaoEPGarcia/me731-p1/85ac694b2f650ebcedbbaeec53d09dd21571d964/painel_definitivo.csv"
 PASTA = Path(__file__).resolve().parent
 DIR_FIG = PASTA / "figuras"
 DIR_RES = PASTA / "resultados"
